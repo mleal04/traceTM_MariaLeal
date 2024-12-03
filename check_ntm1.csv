@@ -1,5 +1,5 @@
 ab_plus_a_machine
-aba
+abbba
 q0,q1,q2,q3,qacc,qrej
 a,b
 a,b,_
@@ -10,7 +10,7 @@ qrej
 # Transitions
 q0,a,q1,a,R
 q1,b,q1,b,R
-q1,a,q2,a,L
-q2,b,q3,b,L
+q1,b,q2,b,R
+q2,a,q3,a,L
 q3,b,q3,b,L
 q3,a,qacc,a,_

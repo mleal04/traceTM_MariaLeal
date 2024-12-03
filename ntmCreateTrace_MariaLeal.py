@@ -1,6 +1,6 @@
 import csv
-
 #start a class to create the NTM before tracing 
+
 class NTM:
     def __init__(self, machine_file):
         self.machine_name = []
@@ -29,38 +29,41 @@ class NTM:
         self.accept_state = lines[6][0]
         self.reject_state = lines[7][0]
 
-        #store the transitions 
+        #store transitions, allowing multiple transitions per state and input
         for line in lines[10:]:
             state, read_char, next_state, write_char, direction = line
-            self.transitions[(state, read_char)] = (next_state, write_char, direction)
+            key = (state, read_char)
+            if key not in self.transitions:
+                self.transitions[key] = []
+            self.transitions[key].append((next_state, write_char, direction))
 
-    #call this fucntion after having started the ntm class 
-    '''input --> input_string and max_depth'''
+    #function to trace input_string through the NTM
     def trace(self, input_string, max_depth=50):
-        tape = list(input_string)                           #tape becomes the input string 
-        configurations = [([], self.start_state, tape[:])]  #add the original input to configs
-        visited = set()                                     #to track visited configurations
-        all_configurations = []                             #for tracing the path
+        tape = list(input_string)                           # Tape becomes the input string 
+        configurations = [([], self.start_state, tape[:])]  # Add the original input to configs
+        visited = set()                                     # To track visited configurations
+        all_configurations = []                             # For tracing the path
 
-        depth = 0                                           #to track the depth of the tree 
+        max_nondeterminism = 0                              # Track the degree of nondeterminism
+        depth = 0                                           # To track the depth of the tree 
         while configurations:
-            #pop the first configuration
+            # Pop the first configuration
             left_of_head, curr_state, curr_tape = configurations.pop(0)
 
-            #mark the current configuration and mark as visited (check if visited too)
+            # Mark the current configuration and mark as visited (check if visited too)
             current_config = (tuple(left_of_head), curr_state, tuple(curr_tape))
             if current_config in visited:
                 continue
             visited.add(current_config)
 
-            #save current_config to all_configs for later tracing 
+            # Save current_config to all_configs for later tracing 
             all_configurations.append((left_of_head[:], curr_state, curr_tape[:]))
 
-            #handle empty tapes 
+            # Handle empty tapes 
             if not curr_tape:
                 curr_tape = ['_']
             
-            #GET THE HEAD CHAR
+            # GET THE HEAD CHAR
             head_char = curr_tape[0]
 
             # Check for accept or reject states
@@ -69,44 +72,52 @@ class NTM:
                     file.write(f'Name of the machine: {self.machine_name[0]}\n')
                     file.write(f'Original input string: {input_string}\n')
                     file.write(f"String accepted in {depth} transitions!\n")
-                    self.print_path(all_configurations, file=file)  
+                    file.write(f"Degree of nondeterminism: {max_nondeterminism}\n")
+                    self.print_path(all_configurations, file=file)
+                return
             elif curr_state == self.reject_state:
                 continue
 
-            #PREPARE FOR NEXT TRANSITIONS 
+            # PREPARE FOR NEXT TRANSITIONS 
             if (curr_state, head_char) in self.transitions:
-                next_state, write_char, direction = self.transitions[(curr_state, head_char)]
-                curr_tape[0] = write_char
-                
-                #if R --> chnage left_tape and pop from curr_tape
-                if direction == "R":
-                    left_of_head.append(curr_tape.pop(0))
-                    if not curr_tape:
-                        curr_tape.append('_')
-                #if L --> insert to curr_tape and pop from left_tape 
-                elif direction == "L":
-                    if left_of_head:
-                        curr_tape.insert(0, left_of_head.pop())
-                    else:
-                        curr_tape.insert(0, '_')
+                transitions = self.transitions[(curr_state, head_char)]
+                max_nondeterminism = max(max_nondeterminism, len(transitions))  # Update max
 
-                #add the new configuration to configurations 
-                new_config = (left_of_head[:], next_state, curr_tape[:])
-                configurations.append(new_config)
+                for next_state, write_char, direction in transitions:
+                    new_tape = curr_tape[:]
+                    new_tape[0] = write_char
+                    
+                    # Handle R direction: move head right
+                    if direction == "R":
+                        new_left = left_of_head[:]
+                        new_left.append(new_tape.pop(0))
+                        if not new_tape:
+                            new_tape.append('_')
+                    
+                    # Handle L direction: move head left
+                    elif direction == "L":
+                        new_left = left_of_head[:]
+                        if new_left:
+                            new_tape.insert(0, new_left.pop())
+                        else:
+                            new_tape.insert(0, '_')
+                    
+                    # Add the new configuration to the queue
+                    configurations.append((new_left, next_state, new_tape))
 
             depth += 1  
             if depth > max_depth:
                 print(f"Execution stopped after {max_depth} steps.")
+                print(f"Degree of nondeterminism during execution: {max_nondeterminism}")
                 return
-        
-        #if string gets rejected 
+
+        # If string gets rejected 
         with open("output_test_cases.txt", "a") as file:
             file.write(f'Name of the machine: {self.machine_name[0]}\n')
             file.write(f'Original input string: {input_string}\n')
             file.write(f'String rejected after {depth} transitions\n')
+            file.write(f"Degree of nondeterminism: {max_nondeterminism}\n")
             self.print_path(all_configurations, file=file)
-
-
 
     def print_path(self, all_configurations, file=None):
         if file:
@@ -117,8 +128,10 @@ class NTM:
             print("Tracing path to accepting state:")
             for left, state, tape in all_configurations:
                 print(f"{left} | {state} | {tape}")
-        file.write("\n")
+        if file:
+            file.write("\n")
 
+# Main function
 def main():
     n_test_cases = 5
     for i in range(n_test_cases):
@@ -129,3 +142,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
