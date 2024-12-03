@@ -1,36 +1,19 @@
 
-Name of the machine: ab_plus_a_machine
-Original input string: aba
-String accepted in 5 transitions!
-Tracing path to accepting state:
-[] | q0 | ['a', 'b', 'a']
-['a'] | q1 | ['b', 'a']
-['a', 'b'] | q1 | ['a']
-['a'] | q2 | ['b', 'a']
-[] | q3 | ['a', 'b', 'a']
-[] | qacc | ['a', 'b', 'a']
-
-Name of the machine: ab_plus_a_machine
-Original input string: aba
-String rejected after 6 transitions
-Tracing path to accepting state:
-[] | q0 | ['a', 'b', 'a']
-['a'] | q1 | ['b', 'a']
-['a', 'b'] | q1 | ['a']
-['a'] | q2 | ['b', 'a']
-[] | q3 | ['a', 'b', 'a']
-[] | qacc | ['a', 'b', 'a']
 
 Name of the machine: ab_plus_a_machine
 Original input string: abbba
-String accepted in 9 transitions!
+String accepted in 12 transitions!
+Degree of nondeterminism: 2
 Tracing path to accepting state:
 [] | q0 | ['a', 'b', 'b', 'b', 'a']
 ['a'] | q1 | ['b', 'b', 'b', 'a']
 ['a', 'b'] | q1 | ['b', 'b', 'a']
+['a', 'b'] | q2 | ['b', 'b', 'a']
 ['a', 'b', 'b'] | q1 | ['b', 'a']
-['a', 'b', 'b', 'b'] | q1 | ['a']
 ['a', 'b', 'b'] | q2 | ['b', 'a']
+['a', 'b', 'b', 'b'] | q1 | ['a']
+['a', 'b', 'b', 'b'] | q2 | ['a']
+['a', 'b', 'b'] | q3 | ['b', 'a']
 ['a', 'b'] | q3 | ['b', 'b', 'a']
 ['a'] | q3 | ['b', 'b', 'b', 'a']
 [] | q3 | ['a', 'b', 'b', 'b', 'a']
@@ -38,14 +21,18 @@ Tracing path to accepting state:
 
 Name of the machine: ab_plus_a_machine
 Original input string: abbba
-String rejected after 10 transitions
+String accepted in 12 transitions!
+Degree of nondeterminism: 2
 Tracing path to accepting state:
 [] | q0 | ['a', 'b', 'b', 'b', 'a']
 ['a'] | q1 | ['b', 'b', 'b', 'a']
 ['a', 'b'] | q1 | ['b', 'b', 'a']
+['a', 'b'] | q2 | ['b', 'b', 'a']
 ['a', 'b', 'b'] | q1 | ['b', 'a']
-['a', 'b', 'b', 'b'] | q1 | ['a']
 ['a', 'b', 'b'] | q2 | ['b', 'a']
+['a', 'b', 'b', 'b'] | q1 | ['a']
+['a', 'b', 'b', 'b'] | q2 | ['a']
+['a', 'b', 'b'] | q3 | ['b', 'a']
 ['a', 'b'] | q3 | ['b', 'b', 'a']
 ['a'] | q3 | ['b', 'b', 'b', 'a']
 [] | q3 | ['a', 'b', 'b', 'b', 'a']
@@ -53,41 +40,26 @@ Tracing path to accepting state:
 
 Name of the machine: ab_plus_a_machine
 Original input string: abbbbbbba
-String accepted in 17 transitions!
+String accepted in 24 transitions!
+Degree of nondeterminism: 2
 Tracing path to accepting state:
 [] | q0 | ['a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'a']
 ['a'] | q1 | ['b', 'b', 'b', 'b', 'b', 'b', 'b', 'a']
 ['a', 'b'] | q1 | ['b', 'b', 'b', 'b', 'b', 'b', 'a']
+['a', 'b'] | q2 | ['b', 'b', 'b', 'b', 'b', 'b', 'a']
 ['a', 'b', 'b'] | q1 | ['b', 'b', 'b', 'b', 'b', 'a']
+['a', 'b', 'b'] | q2 | ['b', 'b', 'b', 'b', 'b', 'a']
 ['a', 'b', 'b', 'b'] | q1 | ['b', 'b', 'b', 'b', 'a']
+['a', 'b', 'b', 'b'] | q2 | ['b', 'b', 'b', 'b', 'a']
 ['a', 'b', 'b', 'b', 'b'] | q1 | ['b', 'b', 'b', 'a']
+['a', 'b', 'b', 'b', 'b'] | q2 | ['b', 'b', 'b', 'a']
 ['a', 'b', 'b', 'b', 'b', 'b'] | q1 | ['b', 'b', 'a']
+['a', 'b', 'b', 'b', 'b', 'b'] | q2 | ['b', 'b', 'a']
 ['a', 'b', 'b', 'b', 'b', 'b', 'b'] | q1 | ['b', 'a']
-['a', 'b', 'b', 'b', 'b', 'b', 'b', 'b'] | q1 | ['a']
 ['a', 'b', 'b', 'b', 'b', 'b', 'b'] | q2 | ['b', 'a']
-['a', 'b', 'b', 'b', 'b', 'b'] | q3 | ['b', 'b', 'a']
-['a', 'b', 'b', 'b', 'b'] | q3 | ['b', 'b', 'b', 'a']
-['a', 'b', 'b', 'b'] | q3 | ['b', 'b', 'b', 'b', 'a']
-['a', 'b', 'b'] | q3 | ['b', 'b', 'b', 'b', 'b', 'a']
-['a', 'b'] | q3 | ['b', 'b', 'b', 'b', 'b', 'b', 'a']
-['a'] | q3 | ['b', 'b', 'b', 'b', 'b', 'b', 'b', 'a']
-[] | q3 | ['a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'a']
-[] | qacc | ['a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'a']
-
-Name of the machine: ab_plus_a_machine
-Original input string: abbbbbbba
-String rejected after 18 transitions
-Tracing path to accepting state:
-[] | q0 | ['a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'a']
-['a'] | q1 | ['b', 'b', 'b', 'b', 'b', 'b', 'b', 'a']
-['a', 'b'] | q1 | ['b', 'b', 'b', 'b', 'b', 'b', 'a']
-['a', 'b', 'b'] | q1 | ['b', 'b', 'b', 'b', 'b', 'a']
-['a', 'b', 'b', 'b'] | q1 | ['b', 'b', 'b', 'b', 'a']
-['a', 'b', 'b', 'b', 'b'] | q1 | ['b', 'b', 'b', 'a']
-['a', 'b', 'b', 'b', 'b', 'b'] | q1 | ['b', 'b', 'a']
-['a', 'b', 'b', 'b', 'b', 'b', 'b'] | q1 | ['b', 'a']
 ['a', 'b', 'b', 'b', 'b', 'b', 'b', 'b'] | q1 | ['a']
-['a', 'b', 'b', 'b', 'b', 'b', 'b'] | q2 | ['b', 'a']
+['a', 'b', 'b', 'b', 'b', 'b', 'b', 'b'] | q2 | ['a']
+['a', 'b', 'b', 'b', 'b', 'b', 'b'] | q3 | ['b', 'a']
 ['a', 'b', 'b', 'b', 'b', 'b'] | q3 | ['b', 'b', 'a']
 ['a', 'b', 'b', 'b', 'b'] | q3 | ['b', 'b', 'b', 'a']
 ['a', 'b', 'b', 'b'] | q3 | ['b', 'b', 'b', 'b', 'a']
@@ -99,15 +71,16 @@ Tracing path to accepting state:
 
 Name of the machine: ab_plus_a_machine
 Original input string: aa
-String rejected after 3 transitions
+String rejected after 2 transitions
+Degree of nondeterminism: 1
 Tracing path to accepting state:
 [] | q0 | ['a', 'a']
 ['a'] | q1 | ['a']
-[] | q2 | ['a', 'a']
 
 Name of the machine: ab_plus_a_machine
 Original input string: ba
 String rejected after 1 transitions
+Degree of nondeterminism: 0
 Tracing path to accepting state:
 [] | q0 | ['b', 'a']
 
